@@ -1,32 +1,35 @@
 import React from "react";
 import Modale from "../Components/Modale";
 import "../Styles/app.css";
+
 function App() {
    const params = {
       title: "HRnet",
+      movable: true,
+      close_button: {
+         title: "E",
+         active: true,
+      },
+      save_button: {
+         title: "yolo",
+         active: true,
+      },
       content: [
-         {
-            type: "image",
-            value: "https://www.w3schools.com/howto/img_avatar.png",
-            class: "avatar",
-         },
+         // {
+         //    type: "image",
+         //    value: "https://www.w3schools.com/howto/img_avatar.png",
+         //    class: "avatar",
+         // },
          {
             type: "text",
             value: "employee created",
-         },
-         {
-            type: "image",
-            value: "https://www.w3schools.com/howto/img_avatar.png",
-         },
-         {
-            type: "image",
-            value: "https://www.w3schools.com/howto/img_avatar.png",
          },
       ],
    };
    return (
       <div className="App">
          <Modale params={params} />
+
          <div className="title">
             <h1>HRnet</h1>
          </div>

@@ -1,0 +1,59 @@
+$header-bg-color: #0f0;
+$header-color: white;
+$header-bg-close-button: red;
+
+.modale-window {
+   background-color: $header-color;
+   border-radius: 2px;
+   position: fixed;
+   border: solid 1px $header-bg-color;
+   &-header {
+      background-color: $header-bg-color;
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+      user-select: none;
+   }
+   &-title {
+      padding: 5px;
+      color: $header-color;
+   }
+   &-close {
+      height: 30px;
+      width: 30px;
+      background-color: $header-bg-color;
+      color: $header-color;
+      border: none;
+      &:hover {
+         background-color: $header-bg-close-button;
+         cursor: pointer;
+      }
+   }
+   &-main {
+      margin: 5px;
+   }
+   &-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      align-content: center;
+   }
+}
+
+.button-modale {
+   width: 100px;
+   height: 25px;
+   border: none;
+   border: solid 1px $header-bg-color;
+   background-color: $header-bg-color;
+   color: $header-color;
+   border-radius: 3px;
+   margin: 5px;
+   &:hover {
+      background-color: $header-color;
+      color: $header-bg-color;
+      cursor: pointer;
+   }
+}

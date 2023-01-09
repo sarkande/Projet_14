@@ -1,72 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "../Styles/modale.css";
 
-//params
-/*
-{
-    title: "",
-
-    buttons: [
-        close_button: true,
-        save_button: true,
-        cancel_button: true,
-        design_button: 'X'
-    ],
-    content: [
-        {
-            type: "text",
-            id: "",
-            value: "",   
-        }
-    ]
-    ,
-    callback: {
-        save: () => {},
-        cancel: () => {},
-        close: () => {}
-}
-*/
-const default_params = {
+const DEFAULT_PARAMS = {
    title: "",
    custom_class: "",
    movable: true,
    resizable: true,
-   buttons: {
-      close_button: true,
-      save_button: true,
-      cancel_button: true,
-      design_button: "X",
-   },
-   content: [],
+   width: "500px",
 
-   callback: {
-      save: () => {},
-      cancel: () => {},
-      close: () => {},
+   close_button: {
+      active: true,
+      title: "X",
+      callback: () => {},
    },
+   save_button: {
+      active: true,
+      title: "Save",
+      callback: () => {},
+   },
+   cancel_button: {
+      active: true,
+      title: "Cancel",
+      callback: () => {},
+   },
+
+   content: [],
 };
 
 function Modale({ params }) {
    params = {
-      ...default_params,
+      ...DEFAULT_PARAMS,
       ...params,
    };
 
    const [show, setShow] = useState(true);
-   const handleClose = () => {
+   const handleButton = (callback) => {
       setShow(false);
-      params.callback.close();
+      if (callback) callback();
    };
-   const handleSave = () => {
-      setShow(false);
-      params.callback.save();
-   };
-   const handleCancel = () => {
-      setShow(false);
-      params.callback.cancel();
-   };
-
-   const classNameCustom = `modale-window ${params.custom_class}`;
-   console.log(params);
+   const classCustom =
+      params.custom_class !== "" &&
+      params.custom_class !== undefined &&
+      params.custom_class !== null
+         ? params.custom_class
+         : "modale-window";
 
    //construct text
    const constructText = [];
@@ -100,23 +77,87 @@ function Modale({ params }) {
       }
    });
 
+   //moveable
+   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+   const [modalePos, setModalePos] = useState({ x: 100, y: 100 });
+   const [modaleIsMoving, setModaleIsMoving] = useState(false);
+   const handleClick = (e) => {
+      //get the offset pos
+      if (params.movable) {
+         setModaleIsMoving(!modaleIsMoving);
+         console.log("click", modaleIsMoving);
+         if (modaleIsMoving) {
+            setModalePos(mousePos);
+         }
+      }
+   };
+
+   useEffect(() => {
+      const handleMouseMove = (event) => {
+         setMousePos({ x: event.clientX, y: event.clientY });
+      };
+      window.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+         window.removeEventListener("mousemove", handleMouseMove);
+      };
+   }, []);
+
+   //render
    return show ? (
-      <div className={classNameCustom}>
-         <h1>{params.title}</h1>
+      <div
+         className={`${classCustom}`}
+         style={{
+            minWidth: params.width,
+            left: `${!modaleIsMoving ? modalePos.x - 30 : mousePos.x - 30}px`,
+            top: `${!modaleIsMoving ? modalePos.y - 15 : mousePos.y - 15}px`,
+         }}
+      >
+         {params.title !== "" || params.close_button.active ? (
+            <div
+               className={`${classCustom}-header`}
+               onClick={handleClick}
+               style={modaleIsMoving ? { cursor: "move" } : null}
+            >
+               <span className={`${classCustom}-title`}>{params.title}</span>
 
-         {params.buttons.close_button ? (
-            <button onClick={handleClose}>
-               {params.buttons.design_button}
-            </button>
+               {params.close_button.active ? (
+                  <button
+                     className={`${classCustom}-close`}
+                     onClick={() => handleButton(params.close_button?.callback)}
+                  >
+                     {params.close_button.title}
+                  </button>
+               ) : null}
+            </div>
          ) : null}
-         {constructText}
+         <div className={`${classCustom}-main`}>
+            {mousePos.x} {mousePos.y}
+            {modaleIsMoving ? "Deplacable" : null}
+            {constructText}
+         </div>
+         {params.save_button.active || params.cancel_button.active ? (
+            <div className={`${classCustom}-buttons`}>
+               {params.save_button.active ? (
+                  <button
+                     className={`${classCustom}-save button-modale`}
+                     onClick={() => handleButton(params.save_button?.callback)}
+                  >
+                     {params.save_button.title}
+                  </button>
+               ) : null}
 
-         {params.buttons.save_button ? (
-            <button onClick={handleSave}>Save</button>
-         ) : null}
-
-         {params.buttons.cancel_button ? (
-            <button onClick={handleCancel}>Cancel</button>
+               {params.cancel_button.active ? (
+                  <button
+                     className={`${classCustom}-cancel button-modale`}
+                     onClick={() =>
+                        handleButton(params.cancel_button?.callback)
+                     }
+                  >
+                     {params.cancel_button.title}
+                  </button>
+               ) : null}
+            </div>
          ) : null}
       </div>
    ) : null;
