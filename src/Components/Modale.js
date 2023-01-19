@@ -33,10 +33,10 @@ function Modale({ params }) {
       ...params,
    };
 
-   const [show, setShow] = useState(true);
    const handleButton = (callback) => {
-      setShow(false);
-      if (callback) callback();
+      if (callback) {
+         callback();
+      }
    };
    const classCustom =
       params.custom_class !== "" &&
@@ -80,15 +80,18 @@ function Modale({ params }) {
    //moveable
    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
    const [modalePos, setModalePos] = useState({ x: 100, y: 100 });
+   const [offsetPos, setoffsetPos] = useState(mousePos);
+
    const [modaleIsMoving, setModaleIsMoving] = useState(false);
    const handleClick = (e) => {
       //get the offset pos
-      if (params.movable) {
+      if (params.movable && e.target.tagName !== "BUTTON") {
+         var rect = e.target.getBoundingClientRect();
+
+         setoffsetPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+
          setModaleIsMoving(!modaleIsMoving);
-         console.log("click", modaleIsMoving);
-         if (modaleIsMoving) {
-            setModalePos(mousePos);
-         }
+         if (modaleIsMoving) setModalePos({ x: mousePos.x, y: mousePos.y });
       }
    };
 
@@ -104,13 +107,21 @@ function Modale({ params }) {
    }, []);
 
    //render
-   return show ? (
+   return (
       <div
          className={`${classCustom}`}
          style={{
             minWidth: params.width,
-            left: `${!modaleIsMoving ? modalePos.x - 30 : mousePos.x - 30}px`,
-            top: `${!modaleIsMoving ? modalePos.y - 15 : mousePos.y - 15}px`,
+            left: `${
+               !modaleIsMoving
+                  ? modalePos.x - offsetPos.x
+                  : mousePos.x - offsetPos.x
+            }px`,
+            top: `${
+               !modaleIsMoving
+                  ? modalePos.y - offsetPos.y
+                  : mousePos.y - offsetPos.y
+            }px`,
          }}
       >
          {params.title !== "" || params.close_button.active ? (
@@ -160,7 +171,7 @@ function Modale({ params }) {
             </div>
          ) : null}
       </div>
-   ) : null;
+   );
 }
 
 export default Modale;

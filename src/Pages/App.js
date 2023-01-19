@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Modale from "../Components/Modale";
 import "../Styles/app.css";
 
@@ -7,12 +8,20 @@ function App() {
       title: "HRnet",
       movable: true,
       close_button: {
-         title: "E",
+         title: "X",
          active: true,
+         callback: () => {
+            setShow(false);
+            return true;
+         },
       },
       save_button: {
-         title: "yolo",
+         title: "Save",
          active: true,
+         callback: () => {
+            setShow(false);
+            return true;
+         },
       },
       content: [
          // {
@@ -26,15 +35,21 @@ function App() {
          },
       ],
    };
+
+   const [show, setShow] = useState(true);
+
+   const handleSave = () => {
+      setShow(true);
+   };
    return (
       <div className="App">
-         <Modale params={params} />
-
+         {show ? <Modale params={params} /> : null}
          <div className="title">
             <h1>HRnet</h1>
          </div>
          <div className="container">
-            <a href="employee-list.html">View Current Employees</a>
+            <Link to="/employee-list">View Current Employees</Link>
+
             <h2>Create Employee</h2>
             <form action="#" id="create-employee">
                <label htmlFor="first-name">First Name</label>
@@ -75,10 +90,7 @@ function App() {
                </select>
             </form>
 
-            <button>Save</button>
-         </div>
-         <div id="confirmation" className="modal">
-            Employee Created!
+            <button onClick={handleSave}>Save</button>
          </div>
       </div>
    );
