@@ -2,10 +2,10 @@
   background-color: white;
   border-radius: 2px;
   position: fixed;
-  border: solid 1px #272727;
+  border: solid 1px #ffbd13;
 }
 .modale-window-header {
-  background-color: #272727;
+  background-color: #ffbd13;
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -22,7 +22,7 @@
 .modale-window-close {
   height: 30px;
   width: 30px;
-  background-color: #272727;
+  background-color: #ffbd13;
   color: white;
   border: none;
 }
@@ -45,14 +45,14 @@
   width: 100px;
   height: 25px;
   border: none;
-  border: solid 1px #272727;
-  background-color: #272727;
+  border: solid 1px #ffbd13;
+  background-color: #ffbd13;
   color: white;
   border-radius: 3px;
   margin: 5px;
 }
 .button-modale:hover {
   background-color: white;
-  color: #272727;
+  color: #ffbd13;
   cursor: pointer;
 }/*# sourceMappingURL=modale.css.map */

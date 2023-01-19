@@ -142,11 +142,7 @@ function Modale({ params }) {
                ) : null}
             </div>
          ) : null}
-         <div className={`${classCustom}-main`}>
-            {mousePos.x} {mousePos.y}
-            {modaleIsMoving ? "Deplacable" : null}
-            {constructText}
-         </div>
+         <div className={`${classCustom}-main`}>{constructText}</div>
          {params.save_button.active || params.cancel_button.active ? (
             <div className={`${classCustom}-buttons`}>
                {params.save_button.active ? (

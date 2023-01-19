@@ -16,12 +16,15 @@ function App() {
          },
       },
       save_button: {
-         title: "Save",
+         title: "Ok",
          active: true,
          callback: () => {
             setShow(false);
             return true;
          },
+      },
+      cancel_button: {
+         active: false,
       },
       content: [
          // {
@@ -31,7 +34,7 @@ function App() {
          // },
          {
             type: "text",
-            value: "employee created",
+            value: "Employee created !",
          },
       ],
    };
