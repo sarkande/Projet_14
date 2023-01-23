@@ -5,21 +5,20 @@ const DEFAULT_PARAMS = {
    title: "",
    custom_class: "",
    movable: true,
-   resizable: true,
    width: "500px",
 
    close_button: {
-      active: true,
+      active: false,
       title: "X",
       callback: () => {},
    },
    save_button: {
-      active: true,
+      active: false,
       title: "Save",
       callback: () => {},
    },
    cancel_button: {
-      active: true,
+      active: false,
       title: "Cancel",
       callback: () => {},
    },

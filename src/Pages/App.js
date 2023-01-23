@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modale from "../Components/Modale";
 import "../Styles/app.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { employeeAdd } from "../Actions";
 function App() {
    const params = {
       title: "HRnet",
@@ -12,7 +13,6 @@ function App() {
          active: true,
          callback: () => {
             setShow(false);
-            return true;
          },
       },
       save_button: {
@@ -20,18 +20,12 @@ function App() {
          active: true,
          callback: () => {
             setShow(false);
-            return true;
          },
       },
       cancel_button: {
          active: false,
       },
       content: [
-         // {
-         //    type: "image",
-         //    value: "https://www.w3schools.com/howto/img_avatar.png",
-         //    class: "avatar",
-         // },
          {
             type: "text",
             value: "Employee created !",
@@ -39,9 +33,10 @@ function App() {
       ],
    };
 
-   const [show, setShow] = useState(true);
-
+   const [show, setShow] = useState(false);
+   const dispatch = useDispatch();
    const handleSave = () => {
+      dispatch(employeeAdd({ test: "test" }));
       setShow(true);
    };
    return (
