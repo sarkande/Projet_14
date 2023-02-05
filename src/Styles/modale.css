@@ -55,4 +55,19 @@
   background-color: white;
   color: #ffbd13;
   cursor: pointer;
+}
+
+td {
+  border: 1px solid #333;
+  padding: 5px;
+}
+
+th {
+  padding: 5px;
+}
+
+thead,
+tfoot {
+  background-color: #333;
+  color: #fff;
 }/*# sourceMappingURL=modale.css.map */
