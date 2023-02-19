@@ -5,9 +5,13 @@ const initialState = {
 const employeeReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD':
-      console.log(action);
-      return {...state, data: [...state.data]};
-
+      return {
+        ...state,
+        data: [...state.data, action.data],
+      };
+    case 'EDIT':
+      console.log('EDIT');
+      break;
     default:
       return state;
   }

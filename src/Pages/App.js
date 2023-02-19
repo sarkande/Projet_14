@@ -49,6 +49,9 @@ function App() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [state, setState] = useState(states[0]);
+  const [department, setDepartment] = useState(departments[0]);
 
   const dispatch = useDispatch();
   const handleSave = e => {
@@ -57,42 +60,37 @@ function App() {
     let lastName = document.getElementById('last-name').value;
     let dateOfBirth = document.getElementById('date-of-birth').value;
     let startDate = document.getElementById('start-date').value;
-
     let street = document.getElementById('street').value;
     let city = document.getElementById('city').value;
-    let state = document.getElementById('state').value;
     let zipCode = document.getElementById('zip-code').value;
 
-    let department = document.getElementById('department').value;
-    if (
-      firstName !== '' &&
-      lastName !== '' &&
-      dateOfBirth !== '' &&
-      startDate !== '' &&
-      street !== '' &&
-      city !== '' &&
-      state !== '' &&
-      zipCode !== '' &&
-      department !== ''
-    ) {
-      dispatch(
-        employeeAdd({
-          firstName: firstName,
-          lastName: lastName,
-          dateOfBirth: dateOfBirth,
-          startDate: startDate,
-          street: street,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          department: department,
-        }),
-      );
-      setShow(true);
-      setError(false);
-    } else {
-      setError(true);
-    }
+    // if (
+    //   firstName !== '' &&
+    //   lastName !== '' &&
+    //   dateOfBirth !== '' &&
+    //   startDate !== '' &&
+    //   street !== '' &&
+    //   city !== '' &&
+    //   zipCode !== ''
+    // ) {
+    //   dispatch(
+    //     employeeAdd({
+    //       firstName: firstName,
+    //       lastName: lastName,
+    //       dateOfBirth: dateOfBirth,
+    //       startDate: startDate,
+    //       street: street,
+    //       city: city,
+    //       state: state,
+    //       zipCode: zipCode,
+    //       department: department,
+    //     }),
+    //   );
+    //   setShow(true);
+    //   setError(false);
+    // } else {
+    //   setError(true);
+    // }
 
     dispatch(
       employeeAdd({
@@ -102,13 +100,19 @@ function App() {
         startDate: startDate,
         street: street,
         city: city,
-        state: state,
+        state: state.value,
         zipCode: zipCode,
         department: department,
       }),
     );
   };
 
+  const _onSelectState = e => {
+    setState(e.value);
+  };
+  const _onSelectDepartment = e => {
+    setDepartment(e.value);
+  };
   return (
     <div className="App">
       {show ? <Modale params={params} /> : null}
@@ -131,12 +135,16 @@ function App() {
           <DatePicker
             id="date-of-birth"
             required={true}
+            selected={dateOfBirth}
+            onChange={date => setDateOfBirth(date)}
+          />
+          <label htmlFor="start-date">Start Date</label>
+          <DatePicker
+            id="start-date"
+            required={true}
             selected={startDate}
             onChange={date => setStartDate(date)}
           />
-          <label htmlFor="start-date">Start Date</label>
-          <input id="start-date" type="text" required={true} />
-
           <fieldset className="address">
             <legend>Address</legend>
 
@@ -148,6 +156,7 @@ function App() {
 
             <label htmlFor="state">State</label>
             <Dropdown
+              onChange={_onSelectState}
               options={states}
               value={states[0]}
               placeholder="Select an option"
@@ -157,6 +166,7 @@ function App() {
           </fieldset>
           <label htmlFor="department">Department</label>
           <Dropdown
+            onChange={_onSelectDepartment}
             options={departments}
             value={departments[0]}
             placeholder="Select an option"

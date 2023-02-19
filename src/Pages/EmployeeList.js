@@ -1,48 +1,30 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
+import 'react-data-grid/lib/styles.css';
 
+import DataGrid from 'react-data-grid';
+import {useSelector} from 'react-redux';
+
+import {datas_labels as columns} from '../Datas/datas_labels';
+
+//https://yarnpkg.com/package/react-table
 function EmployeeList() {
+  const rows = useSelector(state => state.employee.data);
+  console.log(rows);
+  console.log(columns);
+
   return (
     <div className="container">
       <h1>Current Employees</h1>
-      <table className="display">
-        <thead>
-          <tr>
-            <th>firstName</th>
-            <th>lastName</th>
-            <th>birth</th>
-            <th>startDate</th>
-            <th>street</th>
-            <th>city</th>
-            <th>state</th>
-            <th>zip</th>
-            <th>department</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-          </tr>
-          <tr>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-            <td>with two columns</td>
-            <td>The table body</td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <label>Search: </label>
+        <input type="text" />
+      </div>
+      <DataGrid
+        columns={columns}
+        rows={rows}
+        defaultColumnOptions={{width: '1fr'}}
+      />
       <Link to="/">Home</Link>
     </div>
   );
