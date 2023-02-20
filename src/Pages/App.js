@@ -64,47 +64,33 @@ function App() {
     let city = document.getElementById('city').value;
     let zipCode = document.getElementById('zip-code').value;
     console.log(state);
-    // if (
-    //   firstName !== '' &&
-    //   lastName !== '' &&
-    //   dateOfBirth !== '' &&
-    //   startDate !== '' &&
-    //   street !== '' &&
-    //   city !== '' &&
-    //   zipCode !== ''
-    // ) {
-    //   dispatch(
-    //     employeeAdd({
-    //       firstName: firstName,
-    //       lastName: lastName,
-    //       dateOfBirth: dateOfBirth,
-    //       startDate: startDate,
-    //       street: street,
-    //       city: city,
-    //       state: state,
-    //       zipCode: zipCode,
-    //       department: department,
-    //     }),
-    //   );
-    //   setShow(true);
-    //   setError(false);
-    // } else {
-    //   setError(true);
-    // }
-
-    dispatch(
-      employeeAdd({
-        firstName: firstName,
-        lastName: lastName,
-        dateOfBirth: dateOfBirth,
-        startDate: startDate,
-        street: street,
-        city: city,
-        state: state.value,
-        zipCode: zipCode,
-        department: department,
-      }),
-    );
+    if (
+      firstName !== '' &&
+      lastName !== '' &&
+      dateOfBirth !== '' &&
+      startDate !== '' &&
+      street !== '' &&
+      city !== '' &&
+      zipCode !== ''
+    ) {
+      dispatch(
+        employeeAdd({
+          firstName: firstName,
+          lastName: lastName,
+          dateOfBirth: dateOfBirth,
+          startDate: startDate,
+          street: street,
+          city: city,
+          state: state.value,
+          zipCode: zipCode,
+          department: department,
+        }),
+      );
+      setShow(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   const _onSelectState = e => {
