@@ -63,7 +63,7 @@ function App() {
     let street = document.getElementById('street').value;
     let city = document.getElementById('city').value;
     let zipCode = document.getElementById('zip-code').value;
-
+    console.log(state);
     // if (
     //   firstName !== '' &&
     //   lastName !== '' &&
@@ -108,7 +108,7 @@ function App() {
   };
 
   const _onSelectState = e => {
-    setState(e.value);
+    setState(e);
   };
   const _onSelectDepartment = e => {
     setDepartment(e.value);
@@ -158,7 +158,7 @@ function App() {
             <Dropdown
               onChange={_onSelectState}
               options={states}
-              value={states[0]}
+              value={states[0].value}
               placeholder="Select an option"
             />
             <label htmlFor="zip-code">Zip Code</label>
