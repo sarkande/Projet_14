@@ -48,10 +48,10 @@ function EmployeeList() {
           ) {
             return item;
           } else {
-            return;
+            return '';
           }
         })}
-        title="Contact List"
+        title="Employee List"
         pagination
         subHeader
         persistTableHead

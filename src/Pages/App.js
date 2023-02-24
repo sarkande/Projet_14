@@ -38,12 +38,6 @@ function App() {
     cancel_button: {
       active: false,
     },
-    content: [
-      {
-        type: 'text',
-        value: 'Employee created !',
-      },
-    ],
   };
 
   const [show, setShow] = useState(false);
@@ -63,7 +57,6 @@ function App() {
     let street = document.getElementById('street').value;
     let city = document.getElementById('city').value;
     let zipCode = document.getElementById('zip-code').value;
-    console.log(state);
     if (
       firstName !== '' &&
       lastName !== '' &&
@@ -101,7 +94,7 @@ function App() {
   };
   return (
     <div className="App">
-      {show ? <Modale params={params} /> : null}
+      {show ? <Modale params={params}>Employee created !</Modale> : null}
       <div className="title">
         <h1>HRnet</h1>
       </div>
