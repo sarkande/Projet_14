@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-$header-bg-color: #ffbd13;
+$header-bg-color: #ff9900;
 $header-color: white;
 $header-bg-close-button: red;
 * {
@@ -20,6 +20,7 @@ body {
   border-radius: 2px;
   position: fixed;
   border: solid 1px $header-bg-color;
+  z-index: 3;
   &-header {
     background-color: $header-bg-color;
     display: flex;
@@ -100,6 +101,11 @@ fieldset {
   margin-top: 10px;
   margin-bottom: 50px;
   font-weight: 500;
+  &:hover {
+    background-color: #24292e;
+    color: #fafbfc;
+    box-shadow: none;
+  }
 }
 td {
   border: 1px solid #333;

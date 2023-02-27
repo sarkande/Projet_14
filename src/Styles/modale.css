@@ -12,10 +12,11 @@ body {
   background-color: white;
   border-radius: 2px;
   position: fixed;
-  border: solid 1px #ffbd13;
+  border: solid 1px #ff9900;
+  z-index: 3;
 }
 .modale-window-header {
-  background-color: #ffbd13;
+  background-color: #ff9900;
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -31,7 +32,7 @@ body {
 .modale-window-close {
   height: 30px;
   width: 30px;
-  background-color: #ffbd13;
+  background-color: #ff9900;
   color: white;
   border: none;
 }
@@ -54,15 +55,15 @@ body {
   width: 100px;
   height: 25px;
   border: none;
-  border: solid 1px #ffbd13;
-  background-color: #ffbd13;
+  border: solid 1px #ff9900;
+  background-color: #ff9900;
   color: white;
   border-radius: 3px;
   margin: 5px;
 }
 .button-modale:hover {
   background-color: white;
-  color: #ffbd13;
+  color: #ff9900;
   cursor: pointer;
 }
 
@@ -95,6 +96,11 @@ fieldset {
   margin-top: 10px;
   margin-bottom: 50px;
   font-weight: 500;
+}
+.saveButton:hover {
+  background-color: #24292e;
+  color: #fafbfc;
+  box-shadow: none;
 }
 
 td {
