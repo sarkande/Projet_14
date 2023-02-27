@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+* {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgb(255, 255, 255) 62%, rgb(252, 222, 190) 100%);
+}
+
 .modale-window {
   background-color: white;
   border-radius: 2px;
@@ -12,7 +22,6 @@
   align-items: center;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 .modale-window-title {
@@ -55,6 +64,37 @@
   background-color: white;
   color: #ffbd13;
   cursor: pointer;
+}
+
+input {
+  position: relative;
+  width: 99%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #333;
+  outline: none;
+  padding: 8px 52px 8px 10px;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+}
+
+.saveButton {
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-weight: 500;
 }
 
 td {

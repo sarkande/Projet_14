@@ -152,7 +152,7 @@ function App() {
           />
         </form>
 
-        <button disabled={show} onClick={handleSave}>
+        <button className="saveButton" disabled={show} onClick={handleSave}>
           Save
         </button>
       </div>
