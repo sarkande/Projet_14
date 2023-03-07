@@ -1,5 +1,4 @@
 export const employeeAdd = form => dispatch => {
-  console.log(form);
   dispatch({
     type: 'ADD',
     data: {

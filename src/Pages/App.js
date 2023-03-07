@@ -54,7 +54,6 @@ function App() {
   const handleSave = e => {
     e.preventDefault();
     let count = 0;
-    console.log('list', listEmployee);
     let firstName = document.getElementById('first-name').value;
     let lastName = document.getElementById('last-name').value;
     let dateOfBirth = document.getElementById('date-of-birth').value;
