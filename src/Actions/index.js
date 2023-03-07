@@ -12,8 +12,6 @@ export const employeeAdd = form => dispatch => {
       state: form.state,
       zipCode: form.zipCode,
       department: form.department,
-      // edit: '✎',
-      // delete: '❌',
     },
   });
 };

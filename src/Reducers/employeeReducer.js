@@ -9,9 +9,7 @@ const employeeReducer = (state = initialState, action) => {
         ...state,
         data: [...state.data, action.data],
       };
-    case 'EDIT':
-      console.log('EDIT');
-      break;
+
     default:
       return state;
   }

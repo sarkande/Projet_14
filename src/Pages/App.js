@@ -9,7 +9,7 @@ import 'react-dropdown/style.css';
 
 import Modale from '../Components/Modale';
 import '../Styles/app.css';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {employeeAdd} from '../Actions';
 
 import {states, departments} from '../Datas/datas_dropdown';
@@ -42,14 +42,19 @@ function App() {
 
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
+  const [errorTwice, setErrorTwice] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [state, setState] = useState(states[0]);
   const [department, setDepartment] = useState(departments[0]);
 
   const dispatch = useDispatch();
+  const listEmployee = useSelector(state => state.employee.data);
+
   const handleSave = e => {
     e.preventDefault();
+    let count = 0;
+    console.log('list', listEmployee);
     let firstName = document.getElementById('first-name').value;
     let lastName = document.getElementById('last-name').value;
     let dateOfBirth = document.getElementById('date-of-birth').value;
@@ -66,21 +71,40 @@ function App() {
       city !== '' &&
       zipCode !== ''
     ) {
-      dispatch(
-        employeeAdd({
-          firstName: firstName,
-          lastName: lastName,
-          dateOfBirth: dateOfBirth,
-          startDate: startDate,
-          street: street,
-          city: city,
-          state: state.value,
-          zipCode: zipCode,
-          department: department,
-        }),
-      );
-      setShow(true);
-      setError(false);
+      listEmployee.forEach(element => {
+        if (
+          firstName === element.firstName &&
+          lastName === element.lastName &&
+          dateOfBirth === element.dateOfBirth &&
+          startDate === element.startDate &&
+          street === element.street &&
+          city === element.city &&
+          state.value === element.state &&
+          zipCode === element.zipCode &&
+          department === element.department
+        ) {
+          setErrorTwice(true);
+          count++;
+        }
+      });
+      if (count === 0) {
+        dispatch(
+          employeeAdd({
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            startDate: startDate,
+            street: street,
+            city: city,
+            state: state.value,
+            zipCode: zipCode,
+            department: department,
+          }),
+        );
+        setShow(true);
+        setError(false);
+        setErrorTwice(false);
+      }
     } else {
       setError(true);
     }
@@ -104,6 +128,9 @@ function App() {
         <h2>Create Employee</h2>
         {error ? (
           <h3 style={{color: 'red'}}>Error - all fields are required</h3>
+        ) : null}
+        {errorTwice ? (
+          <h3 style={{color: 'red'}}>Error - User already added</h3>
         ) : null}
         <form action="#" id="create-employee">
           <label htmlFor="first-name">First Name</label>
